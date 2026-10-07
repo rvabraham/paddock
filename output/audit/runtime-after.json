@@ -1,0 +1,22 @@
+{
+  "record_status": "historical",
+  "current_validation": "fresh-validation.json",
+  "history_scope": "Values and commit references describe the earlier private history, before the October 7 squash.",
+  "scenario": "Audited release, Monaco replay playing Pace with three drivers and Oscar inspector visible",
+  "build": "First audited Swift 5 release, before the Swift 6 migration and final lifecycle and live-budget corrections",
+  "samples": [
+    {
+      "at": "2026-10-04T20:29:59.522274+00:00",
+      "process": "10602 07:00  27.8 136208   1:01.66"
+    },
+    {
+      "at": "2026-10-04T20:30:04.543591+00:00",
+      "process": "10602 07:05  21.5 137888   1:02.79"
+    },
+    {
+      "at": "2026-10-04T20:30:09.566394+00:00",
+      "process": "10602 07:10  24.9 138064   1:03.84"
+    }
+  ],
+  "limits": "Short process-level observation, not energy profiling or active-race measurement"
+}

@@ -1,0 +1,250 @@
+{
+  "checked_at_utc": "2026-10-05T03:25:59.971321+00:00",
+  "product": "Paddock",
+  "baseline_commit": "bbd11d2d150b1dd4f4ad1ccd3a7b4ef4401287d7",
+  "source_fingerprint": {
+    "algorithm": "SHA-256 of sorted tracked relative paths and contents, NUL separated",
+    "roots": [
+      "Package.swift",
+      "Sources",
+      "Tests",
+      "scripts",
+      "Resources"
+    ],
+    "files": 70,
+    "sha256": "e8052f34102911268b87ab825785a3a374839acdee6448f1036873f388491864"
+  },
+  "tests": {
+    "command": "bash scripts/test.sh",
+    "passed": 92,
+    "failed": 0,
+    "suites": 8,
+    "duration_seconds": 6.576,
+    "swift_language_mode": 6,
+    "complete_concurrency_checking": true,
+    "warnings_as_errors": true,
+    "tested_source_sha256": "9bf41926f9c126ad27c6170e324c2355dfef36c3b2eb26f0934eeb5e578f9e84",
+    "changes_after_test_run": "Only the replay timing frame width changed from 300 to 360 points. Core and test sources are unchanged. The final app was rebuilt and checked natively."
+  },
+  "developer_checks": {
+    "command": "bash scripts/check.sh",
+    "status": "passed",
+    "mocked_fixture_tests": 15,
+    "bundled_json_validations": 12,
+    "shell_and_plist_checks": "passed",
+    "git_diff_check": "passed",
+    "provider_resources_and_icon_changed": false
+  },
+  "build": {
+    "command": "bash scripts/build-app.sh release",
+    "status": "passed",
+    "architecture": "arm64",
+    "minimum_macos": "26.0",
+    "signature": "local ad hoc",
+    "independent_codesign_deep_strict": "passed",
+    "bundle_license_and_notices_match": true,
+    "regular_file_bytes": 10616455,
+    "disk_usage_kib": 10416,
+    "external_package_dependencies": 0,
+    "executable_and_core_library_owner_source_temp_path_matches": 0,
+    "source_sha256": "e8052f34102911268b87ab825785a3a374839acdee6448f1036873f388491864"
+  },
+  "independent_ui_helper_harness": {
+    "status": "passed",
+    "scope": [
+      "missing brackets for speed, throttle, brake, and gear",
+      "exact samples and out-of-range selections",
+      "complete continuous and discrete brackets",
+      "Canada 2024 equal qualifying time ordering",
+      "earliest repeated equal best selection"
+    ],
+    "method": "Extracted actual production helper bodies, compiled with Swift 6 strict concurrency and warnings as errors. No permanent UI test package added.",
+    "evidence": "fresh-independent.md",
+    "helpers_changed_after_run": false
+  },
+  "recorded_data_benchmark": {
+    "command": "bash scripts/benchmark-core.sh --recorded-only",
+    "swift_version": "Apple Swift 6.2.4",
+    "platform": "arm64 macOS 26.6.2",
+    "optimization": "-O",
+    "drivers": 20,
+    "duration_hours": 2,
+    "coordinate_samples": 576020,
+    "telemetry_samples": 576020,
+    "coordinate_stride_bytes": 48,
+    "telemetry_stride_bytes": 96,
+    "operations": [
+      {
+        "operation": "prepare dataset",
+        "baseline_seconds": 0.14123,
+        "audited_seconds": 0.130519,
+        "checksum": 1152040
+      },
+      {
+        "operation": "10000 map and selected-driver queries",
+        "baseline_seconds": 0.101441,
+        "audited_seconds": 0.065574,
+        "checksum": 2440000
+      },
+      {
+        "operation": "10000 full timing snapshots",
+        "baseline_seconds": 0.090323,
+        "audited_seconds": 0.073944,
+        "checksum": 200000
+      }
+    ],
+    "limitation": "Single optimized runs. Excludes drawing, networking, process memory, and energy. No sustained whole-app improvement is established."
+  },
+  "native_checks": {
+    "status": "passed within listed scope",
+    "recordings": [
+      "Included Monaco sample",
+      "Australia 2019 Race (cached completed recording)",
+      "Australia 2019 Qualifying (cached completed recording)"
+    ],
+    "passed": [
+      "20 recorded cars on the actual race map, synchronized selected-driver telemetry and timing",
+      "Timing selection for Hamilton and Vettel; map selection opened Ricciardo inspector",
+      "Compact inspector popover and wide side inspector; native stint and conditions disclosures",
+      "Concise missing telemetry, lap, and tyre states in the included sample",
+      "All five timing columns fit without a horizontal scrollbar at about 981 by 702 points",
+      "980-point minimum width with 270-point sidebar; 1300-point inspector breakpoint; 1470 by 924-point wide layout",
+      "Library season and session controls, native table, and singular 1 session footer",
+      "Actual qualifying comparison with speed, throttle, brake, and gear channels",
+      "Q3 Hamilton lap 17 versus Bottas lap 15: +0.112 seconds whole-lap difference",
+      "Q1 and Q3 phase filtering confined lap pickers to the selected phase",
+      "Replay lap sought the selected completed lap and started playback",
+      "Last completed race recording restored paused after app restart",
+      "Minimized replay retained play intent; restored cursor stayed near its previous position instead of jumping by the hidden interval",
+      "Settings source attribution, storage, and About content inspected without deleting recordings"
+    ],
+    "layout_correction": "Replay timing frame increased from 300 to 360 points after native observation of a clipped State column.",
+    "process_measurements": {
+      "tool": "top, two-second intervals; first sample discarded",
+      "condition": "Australia 2019 race, wide replay window, Hamilton inspector, 1x playback",
+      "prior_release_playing_cpu_percent": [
+        34,
+        35,
+        39
+      ],
+      "final_playing_cpu_percent": [
+        31.7,
+        42.2,
+        40.5
+      ],
+      "final_playing_reported_memory_mib": [
+        248,
+        256,
+        243
+      ],
+      "final_minimized_cpu_percent": [
+        0.1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_minimized_reported_memory_mib": [
+        208,
+        208,
+        208,
+        208,
+        208
+      ],
+      "final_paused_cpu_percent": [
+        0,
+        0,
+        0
+      ],
+      "final_paused_reported_memory_mib": [
+        187,
+        187,
+        187
+      ],
+      "memory_metric": "macOS top MEM as reported, not an RSS or peak-memory ceiling",
+      "conclusion": "Paused and minimized activity is near zero. No sustained playback CPU improvement is established.",
+      "limitation": "Short observations on a host under heavy CPU and memory pressure; no frame-rate or energy measurement."
+    },
+    "independent_final_stack_review": {
+      "duration_seconds": 4,
+      "main_thread_sampling_observations": 2575,
+      "run_loop_wait_branch_observations": 873,
+      "appkit_layout_if_needed_branch_observations": 549,
+      "named_circuit_canvas_branch_observations": 33,
+      "conclusion": "No identifiable app layout cycle or further rendering defect supported by this sample.",
+      "limitation": "Sampling observations are not CPU percentages and do not establish a speedup or regression."
+    },
+    "not_exercised": [
+      "Active chart hover annotation: automation released the selection gesture. Missing-field and boundary helper behavior passed the independent harness.",
+      "Native destructive download deletion: no user recordings were removed. Filesystem failures and cancellation pass core tests."
+    ],
+    "previous_interruption": "The Mac locked during the earlier attempt. Listed checks completed after manual unlock.",
+    "evidence": "fresh-audit.md and fresh-ui.md"
+  },
+  "privacy_and_provenance": {
+    "checked_on": "2026-10-07",
+    "scope": "Tracked snapshot prepared for the single green flag root commit on main.",
+    "reachable_commits": 1,
+    "common_credentials_or_owner_home_paths_found": false,
+    "synthetic_credential_url_test_cases": 2,
+    "unintended_files_found": false,
+    "submodules_or_symlinks_found": false,
+    "commit_body_empty": true,
+    "public_noreply_commit_identity": true,
+    "provider_json_files": 12,
+    "fixtures_and_icon_unchanged_from_original_private_snapshot": true,
+    "research_pdf_and_icon_private_metadata_found": false,
+    "old_direct_live_source_reachable_from_main": false,
+    "history_rewritten": true,
+    "user_recordings_deleted": false,
+    "app_source_and_resources_changed_during_publication_preparation": false,
+    "evidence": "publication.md",
+    "limitation": "Pattern and manual metadata review, not proof that every string or binary byte is harmless or original. Squashing does not guarantee erasure from backups, reflogs, or server retention.",
+    "tracked_files": 104,
+    "unique_snapshot_blobs": 104,
+    "tracked_utf8_files": 102
+  },
+  "publication": {
+    "repository": "rvabraham/paddock",
+    "visibility_at_validation_time": "private, unchanged",
+    "original_code_license": "MIT",
+    "practical_assessment": "No observed source/privacy blocker. Hobby source publication is reasonable if unresolved provider-data risk is accepted.",
+    "legal_clearance_claim": false,
+    "evidence": "publication.md"
+  },
+  "coverage_limits": [
+    "Native acceptance covers the listed recordings and sizes. Active hover annotation and destructive native storage operations were not exercised.",
+    "Short native process measurements do not establish sustained playback CPU improvement, frame rate, or energy efficiency.",
+    "No every-season provider-data fidelity or parity with mature editors is established.",
+    "The payload budget is not an RSS ceiling.",
+    "No zero account/legal consequence assurance is available.",
+    "The app is not Developer ID signed or notarized."
+  ],
+  "audited_commit_before_native_layout_fix": "d3ece8d11e1338463e186173ce857111029cf09f",
+  "fingerprint_scope_correction": {
+    "date": "2026-10-07",
+    "reason": "The earlier filesystem fingerprint included one ignored Python bytecode file. These fingerprints cover only tracked inputs, matching a fresh checkout. App source and resources are unchanged."
+  },
+  "pre_squash_private_history_scan": {
+    "scope": "Earlier private history at history_scan_commit, before the October 7 squash. These counts and flags are historical.",
+    "reachable_commits": 4,
+    "unique_reachable_blobs": 190,
+    "utf8_blobs": 187,
+    "common_credentials_or_owner_home_paths_found": false,
+    "unreachable_local_blobs_checked": 6,
+    "provider_json_files": 12,
+    "fixtures_and_icon_unchanged_since_initial_commit": true,
+    "research_pdf_text_metadata_and_icon_text_chunk_checks": "passed",
+    "old_direct_live_source_remains_in_history": true,
+    "history_rewritten": false,
+    "user_recordings_deleted": false,
+    "evidence": "fresh-services.md",
+    "limitation": "Pattern and manual review, not proof that every string or binary byte is harmless or original.",
+    "history_scan_commit": "d3ece8d11e1338463e186173ce857111029cf09f",
+    "worktree_utf8_files": 101,
+    "worktree_common_pattern_matching_files": 0
+  },
+  "record_status": "historical",
+  "current_validation": "follow-up-validation.json",
+  "historical_scope": "Preceding 92-test release and initial October 7 publication snapshot, before the follow-up repairs."
+}

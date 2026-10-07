@@ -1,0 +1,21 @@
+{
+  "record_status": "historical",
+  "current_validation": "fresh-validation.json",
+  "history_scope": "Values and commit references describe the earlier private history, before the October 7 squash.",
+  "scenario": "Earlier strict Swift 6 release, minimized replay observation before final visibility and queued-ticker fixes",
+  "samples": [
+    {
+      "at": "2026-10-04T20:43:54.882614+00:00",
+      "process": "57217 00:30   0.0 157600   0:03.82"
+    },
+    {
+      "at": "2026-10-04T20:43:59.897403+00:00",
+      "process": "57217 00:35   9.2 154592   0:04.62"
+    },
+    {
+      "at": "2026-10-04T20:44:04.908327+00:00",
+      "process": "57217 00:40  12.4 154784   0:05.32"
+    }
+  ],
+  "limits": "Short process-level observation, not energy profiling. Cursor suspension was inconclusive in this run. Superseded by final native validation after the lifecycle corrections."
+}

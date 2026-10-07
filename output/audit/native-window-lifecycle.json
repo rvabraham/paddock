@@ -1,0 +1,24 @@
+{
+  "record_status": "historical",
+  "current_validation": "fresh-validation.json",
+  "history_scope": "Values and commit references describe the earlier private history, before the October 7 squash.",
+  "scenario": "Scoped native lifecycle observation with temporary diagnostic code",
+  "timestamp_utc": "2026-10-04",
+  "method": "CUA native Play and minimize controls; one in-process observation ten seconds after willMiniaturize with no intervening CUA observation; Command-1 restoration",
+  "observations": [
+    "1791148304.214613 event=attached window=703020 visible=true mini=false occluded=true selected=true minimizing=false appActive=false publish=none mode=idle cursor=0.0 playing=false rate=1.0",
+    "1791148304.557859 event=visibility publication window=703020 visible=true mini=false occluded=true selected=true minimizing=false appActive=false publish=false mode=idle cursor=0.0 playing=false rate=1.0",
+    "1791148304.578414 event=NSWindowDidChangeOcclusionStateNotification window=703020 visible=true mini=false occluded=false selected=true minimizing=false appActive=false publish=false mode=idle cursor=0.0 playing=false rate=1.0",
+    "1791148304.629463 event=visibility publication window=703020 visible=true mini=false occluded=false selected=true minimizing=false appActive=false publish=true mode=idle cursor=0.0 playing=false rate=1.0",
+    "1791148314.45573 event=NSWindowWillMiniaturizeNotification window=703020 visible=true mini=false occluded=false selected=true minimizing=true appActive=false publish=false mode=replay cursor=3981.2840999901296 playing=true rate=1.0",
+    "1791148315.159384 event=NSWindowDidMiniaturizeNotification window=703020 visible=false mini=true occluded=false selected=true minimizing=true appActive=false publish=false mode=replay cursor=3981.2840999901296 playing=true rate=1.0",
+    "1791148315.230371 event=NSWindowDidChangeOcclusionStateNotification window=703020 visible=false mini=true occluded=true selected=true minimizing=true appActive=false publish=false mode=replay cursor=3981.2840999901296 playing=true rate=1.0",
+    "1791148325.5136762 event=ten seconds after willMiniaturize window=703020 visible=false mini=true occluded=true selected=true minimizing=true appActive=false publish=false mode=replay cursor=3981.2840999901296 playing=true rate=1.0",
+    "1791148355.653337 event=NSWindowDidBecomeKeyNotification window=703020 visible=true mini=true occluded=true selected=true minimizing=true appActive=true publish=false mode=replay cursor=3981.2840999901296 playing=true rate=1.0",
+    "1791148356.354908 event=NSWindowDidDeminiaturizeNotification window=703020 visible=true mini=false occluded=true selected=true minimizing=false appActive=false publish=false mode=replay cursor=3981.2840999901296 playing=true rate=1.0",
+    "1791148356.446683 event=NSWindowDidChangeOcclusionStateNotification window=703020 visible=true mini=false occluded=false selected=true minimizing=false appActive=false publish=false mode=replay cursor=3981.2840999901296 playing=true rate=1.0",
+    "1791148356.4491038 event=visibility publication window=703020 visible=true mini=false occluded=false selected=true minimizing=false appActive=false publish=true mode=replay cursor=3981.2840999901296 playing=true rate=1.0"
+  ],
+  "result": "Replay cursor stayed at 3981.2840999901296 while the actual window was minimized; play intent remained true. Restoration resumed at 3981.78980690713 without a hidden elapsed-time jump.",
+  "limits": "Application activity was false in the minimized diagnostic sample. Local lifecycle regressions separately exercise the coverage visibility and activity gates. This diagnostic is not a performance or energy measurement. Temporary instrumentation is removed from the final source and bundle."
+}

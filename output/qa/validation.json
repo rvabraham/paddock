@@ -1,0 +1,56 @@
+{
+  "record_status": "historical",
+  "current_validation": "../audit/fresh-validation.json",
+  "history_scope": "This earlier release record predates the final replay audit and October 7 squash.",
+  "product": "Paddock",
+  "version": "1.0",
+  "checked_on": "2026-10-02",
+  "bundle": "build/Paddock.app",
+  "build": {
+    "configuration": "release",
+    "architecture": "arm64",
+    "minimum_macos": "26.0",
+    "status": "passed",
+    "signature": "local ad hoc, strict recursive verification passed",
+    "external_package_dependencies": 0,
+    "bundled_json_resources": 12
+  },
+  "tests": {
+    "command": "bash scripts/test.sh",
+    "passed": 14,
+    "failed": 0,
+    "duration_seconds": 2.604
+  },
+  "observed_native_ui": [
+    "Release app launched and parsed the included Monaco replay",
+    "Driver selection updated inspector details",
+    "Space toggled replay playback with native timing-table focus",
+    "Command-Right jumped forward a recorded driver lap",
+    "Search accepted Carlos Sainz with a typed space without toggling playback",
+    "Forward and backward seeking updated recorded timing, tyres and race-control history",
+    "Pace comparison displayed distinct teammate lines and excluded slow interruption laps by default",
+    "Strategy and race-control views displayed recorded history",
+    "Monaco outline rendered a complete recorded lap",
+    "An on-demand coordinate request returned 20 genuine car positions",
+    "Free live timing connected and displayed 22 drivers from the latest completed practice",
+    "Completed live-source snapshot was explicitly labeled complete, waiting for the next session",
+    "Calendar month filters and expandable local-time weekend schedules worked",
+    "2026 driver and constructor standings identified round 15",
+    "2024 constructor standings loaded and identified round 24",
+    "Historical session search and Escape download cancellation worked",
+    "Azerbaijan 2026 replay downloaded, opened and updated timing after seeking",
+    "Downloaded replay remained discoverable as On this Mac after restart",
+    "System and Light appearance and broadcast-delay increment/reset worked",
+    "Compact race layout displayed the full sidebar and timing table",
+    "Compact double-click opened accessible driver detail",
+    "Widening restored the full race workspace",
+    "Driver names and team stripes remained visible through two compact-to-wide resize cycles with inspector reopening on the final release build"
+  ],
+  "pending_verification": [],
+  "coverage_limits": [
+    "An active session with sustained changing live updates has not been observed during this validation",
+    "Free live topics do not include moving-car coordinates",
+    "Replay reconstructs timing data and does not include race video",
+    "Watch links use official providers with territory-specific availability"
+  ]
+}

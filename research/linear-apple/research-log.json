@@ -1,0 +1,132 @@
+{
+  "scope": "Primary-source deep research into Linear and Apple build/design philosophy, concrete interaction craft, and implications for live-centered F1 iOS/macOS companion.",
+  "assumptions": [
+    "PDF deliverable in project; no app implementation requested",
+    "Live centerpiece, schedule and replays supporting; video scope unresolved",
+    "f1-race-replay kept as reference only; no audit requested"
+  ],
+  "plan": [
+    {
+      "step": "Define scope: primary-source research on Linear and Apple philosophy, interaction craft, and engineering; apply it to an iOS/macOS F1 companion centered on live coverage. Assume a cited PDF report saved in this project.",
+      "status": "completed"
+    },
+    {
+      "step": "Discover official essays, changelogs, design guidance, developer sessions, and product releases in distinct research lanes.",
+      "status": "completed"
+    },
+    {
+      "step": "Reconcile evidence and gaps; verify consequential claims and identify transferable principles, tensions, and boundaries.",
+      "status": "completed"
+    },
+    {
+      "step": "Synthesize a cited report with concrete F1 interaction and build recommendations, clearly separated from observed practices.",
+      "status": "completed"
+    },
+    {
+      "step": "Generate, render, and verify the PDF and deliver it.",
+      "status": "completed"
+    }
+  ],
+  "gap_matrix": [
+    {
+      "claim": "Linear combines depth and calm hierarchy",
+      "support": "2026 refresh + 2024 redesign",
+      "confidence": "high for stated practice",
+      "gap": "Compare implementation accountability vs formal design system claims",
+      "next": "StyleX and quality policy"
+    },
+    {
+      "claim": "Linear microinteraction craft extends beyond animation",
+      "support": "Changelogs 2020, 2022/23, 2024, 2026",
+      "confidence": "high for release-note claims",
+      "gap": "Do not claim observed behavior or exhaustive census",
+      "next": "Resolve canonical dated URLs"
+    },
+    {
+      "claim": "Apple principles evolve while content and agency endure",
+      "support": "WWDC2018 803 and WWDC2025 356",
+      "confidence": "high for published guidance",
+      "gap": "Check 2026 supersession",
+      "next": "WWDC2026 250"
+    },
+    {
+      "claim": "Live-sports depth can fit glanceable surfaces",
+      "support": "Apple Sports 2025 and May2026 releases",
+      "confidence": "high for announced features",
+      "gap": "Not proof of F1 feed capabilities or latency",
+      "next": "ActivityKit constraints"
+    },
+    {
+      "claim": "Engineering preserves freshness and responsive input separately",
+      "support": "Linear delta sync and Apple performance sessions",
+      "confidence": "high principles; proposed F1 architecture",
+      "gap": "No provider selected or benchmark verified",
+      "next": "Independent sync source read"
+    }
+  ],
+  "discovery": [
+    "Linear official philosophy/Method/engineering lane",
+    "Apple official HIG and WWDC transcripts lane",
+    "Linear changelog examples across 2020, 2022/23, 2024, 2026",
+    "Apple Sports releases 2025 and 2026"
+  ],
+  "followup": [
+    "Canonical dated changelog URLs",
+    "Linear 2026 design refresh and StyleX formal-system contradiction",
+    "2026 delta sync authority/reconnect correctness",
+    "Zero-bugs detailed policy vs earlier simplification",
+    "WWDC26 supersession and announcement status",
+    "Official Live Activities and ActivityKit excerpts"
+  ],
+  "root_queries": [
+    "site:linear.app/changelog animation hover keyboard shortcuts performance design",
+    "site:linear.app/now micro interactions design details",
+    "site:apple.com/newsroom Apple Sports live activities design real time scores",
+    "site:linear.app/changelog \"animation\" \"2024\"",
+    "site:linear.app/changelog \"hover\" \"delay\"",
+    "site:linear.app/changelog \"reduced motion\"",
+    "site:linear.app/changelog \"offline\" \"2025\"",
+    "site:developer.apple.com ActivityKit \"stale\" \"budget\"",
+    "site:developer.apple.com \"Live Activities\" \"too much\" \"information\"",
+    "site:linear.app/changelog \"Dialogs no longer close\""
+  ],
+  "stop_reason": "Primary-source discovery and targeted follow-up now support philosophy, microinteraction examples, workflow, accessibility, platform adaptation, and performance. Current 2026 sources checked. Differences in bug policies, team-size wording, formal design-system claims, and OS announcement vs shipping are bounded. Further broad searches unlikely to change findings. No exhaustive interaction census or live-feed feasibility claim.",
+  "spot_checks": "Parent independently opened all material sources and inspected high-impact sections on simplicity, sync correctness, bug policy, component contracts, visual accessibility, performance identity and 2026 material refinements.",
+  "review": "Separate Linear and Apple readers checked draft for factual overreach. Linear found one narrow wording issue about the simplified bug policy; corrected. Apple found no consequential corrections.",
+  "gap_resolution": {
+    "density": "Supported by Linear 2026 refresh and Apple WWDC26 principles",
+    "design_system": "Distinguished shared components/tokens from lack of formal system in StyleX account",
+    "bug_policy": "Detailed September 2025 policy qualifies May 2025 simplified wording",
+    "apple_currency": "WWDC26 checked; announced changes not asserted shipped",
+    "live_surfaces": "HIG and ActivityKit visible indexed official excerpts; direct extraction limited",
+    "live_feasibility": "Outside study; no provider or availability claim"
+  },
+  "verification": {
+    "pdf": "output/pdf/linear-apple-design-research.pdf",
+    "pages": 14,
+    "primary_sources": 32,
+    "visual_review": "All 14 rendered pages inspected at original detail. No clipping, overlap, missing glyphs, or source-note defects found.",
+    "reviewed_pages_by_parent": [
+      1,
+      6,
+      10,
+      11,
+      13,
+      14
+    ],
+    "reviewed_pages_by_linear_reviewer": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "reviewed_pages_by_apple_reviewer": [
+      7,
+      8,
+      9,
+      12
+    ],
+    "structural_review": "PDF read-back, expected page count, 32 distinct cited source URL annotations, no unresolved source IDs or replacement glyphs. All hyperlinks match cited sources; page fetch limits disclosed.",
+    "content_review": "Linear and Apple independent reviewers checked report. One bug-policy attribution corrected; no other consequential issues found."
+  }
+}

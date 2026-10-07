@@ -1,0 +1,106 @@
+{
+  "record_status": "historical",
+  "current_validation": "fresh-validation.json",
+  "history_scope": "Values and commit references describe the earlier private history, before the October 7 squash.",
+  "checked_at_utc": "2026-10-04T21:19:22.382413+00:00",
+  "product": "Paddock",
+  "source_fingerprint": {
+    "algorithm": "SHA-256 of sorted relative paths and contents, NUL separated",
+    "roots": [
+      "Package.swift",
+      "Sources",
+      "Tests",
+      "scripts",
+      "Resources"
+    ],
+    "files": 62,
+    "sha256": "e7c2df9370fb5bec33d480aaf0d8700a8aa377e43b6e9a531a5fecf0c97bb2cb"
+  },
+  "build": {
+    "command": "bash scripts/build-app.sh release",
+    "status": "passed",
+    "swift_language_mode": 6,
+    "complete_concurrency_checking": true,
+    "warnings_as_errors": true,
+    "architecture": "arm64",
+    "minimum_macos": "26.0",
+    "signature": "local ad hoc",
+    "independent_codesign_deep_strict": "passed",
+    "bundle_license_and_notices_match": true,
+    "temporary_diagnostic_source_scan": "no matches",
+    "bundle_disk_usage": "8.9 MiB",
+    "external_package_dependencies": 0
+  },
+  "tests": {
+    "command": "bash scripts/test.sh",
+    "passed": 51,
+    "failed": 0,
+    "suites": 8,
+    "duration_seconds": 4.678
+  },
+  "developer_checks": {
+    "command": "bash scripts/check.sh",
+    "status": "passed",
+    "mocked_fixture_tests": 15,
+    "bundled_json_validations": 12,
+    "git_diff_check": "passed",
+    "provider_resources_and_icon_changed": false
+  },
+  "native_checks": [
+    {
+      "scenario": "Clean final release launch",
+      "result": "Bundled Monaco replay loaded with 20 driver rows and a paused cursor at 3981.28409999013 seconds."
+    },
+    {
+      "scenario": "Coverage and Calendar shortcuts",
+      "result": "Command-2 opened Calendar; Space left playback paused; Command-1 returned to the unchanged cursor at 4116.819459198126 seconds."
+    },
+    {
+      "scenario": "Settings and main scene reopening",
+      "result": "Settings opened with System appearance and zero delay. With Settings still open, the native main-window close button left Settings available. Command-3 recreated the main scene directly in Replays."
+    },
+    {
+      "scenario": "Actual minimized playback and restoration",
+      "evidence": "native-window-lifecycle.json",
+      "result": "Exact cursor and play intent retained at the independent ten-second hidden observation. Command-1 restored and resumed without adding hidden elapsed time.",
+      "limitation": "The hidden native sample also had application activity false. Local lifecycle tests separately exercise visibility and activity gates. Temporary diagnostic code was removed before the clean final build."
+    },
+    {
+      "scenario": "Six-driver Pace comparison on clean final release",
+      "result": "Leclerc, Piastri, Sainz, Norris, Russell, and Verstappen plotted together. Additional unselected menu entries were disabled. All six choices survived Timing to Pace switching."
+    },
+    {
+      "scenario": "Earlier native checks within this audit",
+      "result": "Timing-table Space, editable search spaces, Command-F, compact and wide inspector preferences, all coverage panes, calendar expansion/open cancellation, saved replay discovery, both standings categories, Settings, and completed live snapshot/disconnect were exercised.",
+      "evidence": "ui.md"
+    }
+  ],
+  "publication": {
+    "repository": "rvabraham/paddock",
+    "code_license": "MIT",
+    "visibility_at_validation_time": "private, unchanged",
+    "audit_changes_at_validation_time": "local, uncommitted and unpushed",
+    "rights_assessment_at_validation_time": "Bundled provider data and direct live-feed rights need assessment before publication.",
+    "status_scope": "Audit snapshot at checked_at_utc, before the subsequent decision to publish the hobby project."
+  },
+  "coverage_limits": [
+    "Sustained changing data during an active race was not observed.",
+    "Whole-app RSS and energy improvements are not established by the microbenchmarks or short process samples.",
+    "Estimated live payload caps do not bound RSS, temporary allocations, or derived session history.",
+    "The locally signed app is not Developer ID signed or notarized for distribution.",
+    "Free live topics provide no moving-car coordinates. Replays contain recorded timing, not race video."
+  ],
+  "publication_follow_up": {
+    "maintainer_decision": "Publish source as a noncommercial hobby project, accepting ordinary project risk.",
+    "original_code_license": "MIT, unchanged. The hobby purpose adds no license restriction.",
+    "provider_data_and_live_feed": "Retained with separate provider terms, experimental feed limitations, and unresolved upstream rights disclosed.",
+    "clearance_claim": "No upstream permission or clearance is asserted.",
+    "documentation_preparation": "No code/data change, history rewrite, commit, push, or visibility change was made during this documentation follow-up.",
+    "source_formatting": {
+      "change": "Removed one trailing blank line from Sources/PaddockCore/ProviderError.swift after validation. No semantic code change.",
+      "files": 62,
+      "sha256": "3dd51b002595b366f7f69629f7bd3c1a74577d85652fd70a80739069fd82a24f",
+      "algorithm": "SHA-256 of sorted relative paths and contents, NUL separated"
+    }
+  }
+}

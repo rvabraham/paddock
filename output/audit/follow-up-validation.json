@@ -1,0 +1,147 @@
+{
+  "checked_at_utc": "2026-10-07T20:48:04.301181+00:00",
+  "base_revision": "21473d122eb0d6d76d24cab104c5a828e07c7f25",
+  "source_fingerprint": {
+    "algorithm": "SHA-256 of sorted tracked relative paths and contents, NUL separated",
+    "roots": [
+      "Package.swift",
+      "Sources",
+      "Tests",
+      "scripts",
+      "Resources"
+    ],
+    "files": 70,
+    "sha256": "fd86a8ed41be34220177eec5a1c225bc43ddab6ed417ea40d05cce8308f72cf5"
+  },
+  "tests": {
+    "command": "./scripts/test.sh",
+    "status": "passed",
+    "passed": 104,
+    "failed": 0,
+    "suites": 8,
+    "duration_seconds": 15.256,
+    "swift_language_mode": 6,
+    "complete_concurrency_checking": true,
+    "warnings_as_errors": true,
+    "input_sha256": "fd86a8ed41be34220177eec5a1c225bc43ddab6ed417ea40d05cce8308f72cf5"
+  },
+  "developer_checks": {
+    "command": "./scripts/check.sh",
+    "status": "passed",
+    "mocked_fixture_tests": 15,
+    "bundled_fixture_validations": 12,
+    "scope": "Scripts, plist and bundled fixtures unchanged during follow-up.",
+    "git_diff_check": "passed"
+  },
+  "build": {
+    "command": "./scripts/build-app.sh",
+    "configuration": "release",
+    "status": "passed",
+    "platform": "26.6.2",
+    "architecture": "arm64",
+    "compiler": "Apple Swift version 6.2.4 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)",
+    "complete_concurrency_checking": true,
+    "warnings_as_errors": true,
+    "signature": "ad hoc; deep and strict verification passed",
+    "bundle_bytes": 10642439,
+    "bundle_files": 20,
+    "bundle_sha256": "6473b63e9a9ee8f3e36b913d9bcdab0fdeda6e9eb227fe98756bdd0e37b8e1a8",
+    "bundle_hash_algorithm": "SHA-256 of sorted bundle-relative paths and file contents, NUL separated",
+    "executable_sha256": "8b4b2f34e3acc7ee7e70782c47713174846d893882229e64bd8dbf90a7e91e82",
+    "core_dylib_sha256": "ef1b00a9178da892fb90586b434ccb83330b98da35647ae8a8afebc489f3a25d",
+    "input_sha256": "fd86a8ed41be34220177eec5a1c225bc43ddab6ed417ea40d05cce8308f72cf5"
+  },
+  "native_checks": {
+    "verdict": "VERIFIED",
+    "runtime_binding": "Final release build completed, previous process quit through native UI, and the same bundle was freshly launched before final interactions.",
+    "windows": [
+      {
+        "width": 980,
+        "outer_height": 702,
+        "content_minimum_height": 650,
+        "sidebar_width": 270
+      },
+      {
+        "width": 1300,
+        "outer_height": 702,
+        "sidebar_width": 270
+      }
+    ],
+    "observations": [
+      "Completed Australia 2019 Race restored paused at 0:00.",
+      "Race LEC lap 58 / BOT lap 57 speed, throttle, brake and gear traces rendered; whole-lap delta -1.346 s.",
+      "Changing reference to LEC lap 16 updated trace and whole-lap delta to -3.519 s; Replay lap sought to lap 16 at 26:10 and entered playback. Playback was then paused.",
+      "Compact Library filters, columns, actions and footer fit with maximum sidebar.",
+      "Compact Calendar expanded all five Australia 2026 session rows with readable labels, dates, times and Open actions.",
+      "Driver and constructor standings rendered and refreshed to matching round 16 metadata.",
+      "Historical 2019 catalog loaded through typed cache boundary and opened completed Australia Qualifying.",
+      "Q1 selected HAM lap 5; Q3 selected HAM lap 17. Comparison selected BOT lap 15 and displayed +0.112 s.",
+      "Wide inspector toggle was checked in the unchanged baseline UI; affected analysis layout was rechecked in final release."
+    ],
+    "scope": "Listed native interactions only; exact data fidelity across all seasons, active held-pointer crosshair, and partial-telemetry native cases are not established."
+  },
+  "chart_helper_checks": {
+    "status": "passed",
+    "assertions": 56,
+    "production_file": "Sources/PaddockApp/LapAnalysisView.swift",
+    "file_sha256": "08e6d022551c76b3e9140e22dd3d24a2ca3f3d5eb11f6abcac25b80092eb98b4",
+    "compiler_mode": "Swift 6 complete concurrency checking; warnings as errors",
+    "scope": "Extracted actual trace preparation and selected-reading helper bodies plus source ownership checks; missing segments, empty arrays, exact/out-of-range values, continuous/discrete brackets.",
+    "native_drag_latency_measured": false
+  },
+  "independent_review": {
+    "model": "Sol 6.1",
+    "reasoning_effort": "xhigh",
+    "status": "no remaining actionable findings in integrated repairs",
+    "integer_fixture_field_occurrences_checked": 80144,
+    "fractional_integer_fields_found": 0
+  },
+  "publication": {
+    "repository": "rvabraham/paddock",
+    "visibility_at_check": "private, unchanged",
+    "commit_subject": "green flag",
+    "commit_body": "empty",
+    "reachable_commits": 1,
+    "original_code_license": "MIT",
+    "provider_resources_icon_pdf_changed": false,
+    "practical_assessment": "Source/privacy publication check passes. Hobby publication remains reasonable if unresolved provider-data risk is accepted.",
+    "legal_clearance_claim": false,
+    "assessment": "publication.md"
+  },
+  "coverage_limits": [
+    "No parity with mature editors or flawless behavior across every recording and Mac is established.",
+    "No new sustained playback CPU, memory or energy improvement is claimed; preceding measurements remain historical.",
+    "Active crosshair rendering with held input and partial-telemetry native cases were not observed.",
+    "Every-season provider compatibility, hostile same-user filesystem races and legal clearance are unproven.",
+    "App is ad hoc signed, without Developer ID signing or notarization."
+  ],
+  "publication_scan": {
+    "checked_at_utc": "2026-10-07T20:49:01.102701+00:00",
+    "scope": "All tracked files and the two new follow-up audit files prepared for the single green flag root commit.",
+    "counts": {
+      "files": 106,
+      "utf8_files": 104,
+      "markdown_files": 18,
+      "json_files": 25,
+      "local_markdown_links": 88
+    },
+    "common_secrets_or_owner_paths_found": false,
+    "symlinks_or_submodules_added": false,
+    "synthetic_credential_url_tests": [
+      {
+        "file": "Tests/PaddockCoreTests/ServiceTests.swift",
+        "line": 121
+      },
+      {
+        "file": "Tests/PaddockCoreTests/ServiceTests.swift",
+        "line": 126
+      }
+    ],
+    "broken_markdown_links": [],
+    "all_json_parses": true,
+    "provider_fixtures_icon_pdf_unchanged": true,
+    "binary_metadata_evidence": "Unchanged PDF and icon bytes retain initial October 7 metadata/privacy verification.",
+    "prior_validation_values_preserved": true,
+    "scan_limit": "Pattern scanning and manual review cannot prove every byte harmless or establish upstream rights."
+  }
+}

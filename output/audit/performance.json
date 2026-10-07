@@ -1,0 +1,148 @@
+{
+  "record_status": "historical",
+  "current_validation": "fresh-validation.json",
+  "history_scope": "Values and commit references describe the earlier private history, before the October 7 squash.",
+  "schema_version": 1,
+  "date": "2026-10-04",
+  "environment": {
+    "architecture": "arm64",
+    "os": "macOS 26.6.2 (25G83)",
+    "compiler": "Apple Swift 6.2.4 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)",
+    "swift_language_mode": 5,
+    "optimization": "-O",
+    "hardware_model": "Not queried successfully in sandbox"
+  },
+  "method": {
+    "command": "bash scripts/benchmark-core.sh 5000",
+    "harness": "scripts/benchmarks/CoreBenchmark.swift",
+    "timer": "ContinuousClock",
+    "fixture": "bundled OpenF1 Monaco 2024 session 9523",
+    "random_seek_seconds": "(iteration * 7919) % Int(replay.duration)",
+    "sequential_seek_seconds": "iteration / iterations * replay.duration",
+    "source_rows": {
+      "drivers": 20,
+      "completed_laps": 1217,
+      "intervals": 23976,
+      "positions": 127,
+      "coordinates": 476,
+      "race_control_messages": 122
+    },
+    "comparison": "Original chronological scan reconstructed in the same optimized executable versus driver/date binary-search indices. Checksums prevent discarded calculations; correctness is separately checked against the scan in tests."
+  },
+  "initial_snapshot_before_changes": {
+    "iterations": 5000,
+    "random_snapshot_seconds": 30.597152166,
+    "random_snapshot_checksum": 137396,
+    "sequential_full_state_seconds": 30.255203708,
+    "sequential_full_state_checksum": 528084,
+    "selected_histories_seconds": 0.115578458,
+    "selected_histories_checksum": 137902,
+    "five_bundled_decodes_seconds": 4.243803583,
+    "decode_checksum": 6085
+  },
+  "integrated_matched_run": {
+    "iterations": 5000,
+    "scan_reference_random_snapshot_seconds": 42.553873,
+    "indexed_random_snapshot_seconds": 0.219957,
+    "random_snapshot_checksum": 137396,
+    "lookup_speedup": 193.46,
+    "indexed_full_sequential_state_seconds": 0.213042,
+    "sequential_full_state_checksum": 528084,
+    "indexed_selected_histories_seconds": 0.007952,
+    "selected_histories_checksum": 137902,
+    "five_bundled_decodes_seconds": 2.671287,
+    "decode_checksum": 6085
+  },
+  "startup_matched_decoder_run": {
+    "command": "bash scripts/benchmark-core.sh 1000",
+    "five_codable_reference_decodes_seconds": 5.027848,
+    "five_foundation_decodes_seconds": 2.244859,
+    "decode_checksum": 6085,
+    "decoder_speedup": 2.24,
+    "scan_reference_random_snapshot_seconds": 7.176196,
+    "indexed_random_snapshot_seconds": 0.043758,
+    "random_snapshot_checksum": 27373,
+    "indexed_full_sequential_state_seconds": 0.045424,
+    "sequential_full_state_checksum": 105542,
+    "indexed_selected_histories_seconds": 0.001256,
+    "selected_histories_checksum": 27546
+  },
+  "live_sparse_patch_budget_run": {
+    "command": "bash scripts/benchmark-core.sh --live-only",
+    "swift_language_mode": 6,
+    "optimization": "-O",
+    "fixture": "22-driver TimingData topic with lap, position, gap, pit, last-lap and sector fields; sparse Position updates for driver 16",
+    "iterations": 10000,
+    "merge_reference_seconds": 0.013925,
+    "full_reducer_with_changed_topic_budget_seconds": 0.054093,
+    "full_reducer_microseconds_per_patch": 5.4093,
+    "checksum": 114940,
+    "comparison": "The reference performs merging alone. The reducer performs merging, changed-topic cost accounting and existing reduction bookkeeping. This comparison does not isolate the incremental cost of budget accounting.",
+    "retired": true
+  },
+  "scope_and_limits": [
+    "Replay and decoder measurements above used the historical Swift 5 language mode; the later live patch run used Swift 6. The current reproduction script uses Swift 6.",
+    "These are replay data lookup and decode microbenchmarks, not whole-app speedups.",
+    "Builds, tests and native QA ran during some measurements. Absolute durations varied with machine load.",
+    "No threshold performance tests were added. Functional tests compare state values across forward/backward seeks and event boundaries.",
+    "No live race throughput, network latency, RSS or energy usage was measured by this harness.",
+    "Paused replay and hidden/inactive coverage schedule no animation ticker; lifecycle tests confirm time suspends and resumes.",
+    "The retained live event/topic budgets belonged to the retired live engine. Current playback uses recorded source-rate arrays and provider-bounded durable archives."
+  ],
+  "historical_measurements_note": "Initial, integrated matched, startup decoder, and sparse live patch runs were measured before the recorded-only replay overhaul. Their original language modes and values are preserved; the live harness has been retired.",
+  "recorded_source_rate_run": {
+    "command": "bash scripts/benchmark-core.sh --recorded-only",
+    "environment": {
+      "architecture": "arm64",
+      "os": "macOS 26.6.2 (25G83)",
+      "compiler": "Apple Swift 6.2.4 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)",
+      "swift_language_mode": 6,
+      "optimization": "-O"
+    },
+    "fixture": {
+      "duration_seconds": 7200,
+      "drivers": 20,
+      "source_samples_per_second_per_driver": 4,
+      "coordinate_samples": 576020,
+      "telemetry_samples": 576020,
+      "coordinate_sample_stride_bytes": 48,
+      "telemetry_sample_stride_bytes": 96
+    },
+    "dataset_preparation_seconds": 0.179227,
+    "dataset_preparation_checksum": 1152040,
+    "render_cursor_iterations": 10000,
+    "map_and_selected_driver_cursor_seconds": 0.129953,
+    "map_and_selected_driver_cursor_checksum": 2440000,
+    "microseconds_per_map_and_selected_driver_cursor": 12.9953,
+    "timing_snapshot_iterations": 10000,
+    "timing_snapshot_seconds": 0.063885,
+    "timing_snapshot_checksum": 200000,
+    "method": "Synthetic source arrays are built before timing. Preparation validates, sorts and indexes typed samples and finds recorded track geometry. Each render query performs 20 interpolated car lookups and one selected-driver telemetry lookup at seeded dates. Timing snapshots reconstruct 20 drivers. Checksums retain all results.",
+    "limits": [
+      "Synthetic source data has complete 4 Hz coverage and simple timing. Real archive sparsity and car counts vary.",
+      "Counts and MemoryLayout strides are not RSS measurements. Temporary construction and rendering costs outside the queried core are not included.",
+      "This measures core cursor queries and archive preparation, not whole-app frame rate or transport throughput."
+    ]
+  },
+  "recorded_source_rate_final_validation": {
+    "command": "bash scripts/benchmark-core.sh --recorded-only",
+    "environment": {
+      "architecture": "arm64",
+      "os": "macOS 26.6.2 (25G83)",
+      "compiler": "Apple Swift 6.2.4 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)",
+      "swift_language_mode": 6,
+      "optimization": "-O"
+    },
+    "fixture": "Same two-hour, 20-driver, 4 Hz fixture and method as recorded_source_rate_run",
+    "dataset_preparation_seconds": 0.139917,
+    "dataset_preparation_checksum": 1152040,
+    "render_cursor_iterations": 10000,
+    "map_and_selected_driver_cursor_seconds": 0.149022,
+    "map_and_selected_driver_cursor_checksum": 2440000,
+    "microseconds_per_map_and_selected_driver_cursor": 14.9022,
+    "timing_snapshot_iterations": 10000,
+    "timing_snapshot_seconds": 0.084411,
+    "timing_snapshot_checksum": 200000,
+    "scope": "Held sources after dated lap-validity indexing and before the final open-pit, terminal-status, and source-best/qualifying-phase corrections. The synthetic fixture has no pit intervals or qualifying phases. Integrated tests compiled during this run, so absolute times remain sensitive to machine load. Retained sample counts and strides are unchanged. This does not measure native drawing, network transport, RSS, or energy usage."
+  }
+}

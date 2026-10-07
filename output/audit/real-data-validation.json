@@ -1,0 +1,96 @@
+{
+  "date": "2026-10-07",
+  "scope": "Remove bundled datasets without showing synthetic data in the app",
+  "source_inputs": {
+    "count": 57,
+    "sha256": "ea070f6bc6a3248ed497e5b874190570b773b8c441cb1796fc29998f87cc7ca5",
+    "algorithm": "Sorted repository-relative path + NUL + file bytes + NUL"
+  },
+  "tests": {
+    "command": "./scripts/test.sh",
+    "passed": 107,
+    "suites": 8,
+    "runtime_seconds": 4.438,
+    "swift_version_mode": 6,
+    "strict_concurrency": "complete",
+    "warnings_as_errors": true
+  },
+  "static_checks": {
+    "command": "./scripts/check.sh",
+    "passed": true,
+    "diff_whitespace": "passed"
+  },
+  "release": {
+    "command": "./scripts/build-app.sh",
+    "passed": true,
+    "signature": "ad hoc; deep strict verification passed",
+    "app_bytes": 6476986,
+    "files": {
+      "Contents/Frameworks/libPaddockCore.dylib": "1a50c1b79260ddb20af956851f75c53a02928460584a521b8ccbed9514d36acc",
+      "Contents/Info.plist": "8b45f0132797cb067956cc74177eaf1125c1be313ee123eb83922645e0b792ef",
+      "Contents/MacOS/Paddock": "2e4f4a8de422396597f6a078b5abfd8e8d403d1656ff5aa2d5bddde179bc7af1",
+      "Contents/Resources/AppIcon.icns": "4f5fa15e4ac807cda24dba7dfebbd7458f2873117bd17152f53248571eb2aa97",
+      "Contents/Resources/LICENSE": "f52325520beefeaba6c84541b545d1aebfebbd1be440a32093a9474023c60fd7",
+      "Contents/Resources/THIRD_PARTY_NOTICES.md": "158d0c1817bfa20d6689d09350fd227c417222fb840323f0a303f81983624190",
+      "Contents/_CodeSignature/CodeResources": "a78810b24b78ab446662e49a230404c7b115061482aacf4a5767d7062de7022e"
+    }
+  },
+  "bundling": {
+    "provider_json_files": 0,
+    "application_json_files": 0,
+    "resource_bundle_present": false,
+    "synthetic_inputs": "Tests and standalone command-line benchmark only; neither is compiled or copied into the app"
+  },
+  "native_acceptance": {
+    "release_saved_restore": {
+      "session": "Australia 2019 qualifying",
+      "paused": true,
+      "cursor_seconds": 0,
+      "duration": "1:03:47",
+      "q3_hamilton": "1:20.486",
+      "window_points": [
+        980,
+        702
+      ]
+    },
+    "fresh_empty_storage": {
+      "method": "Temporary native app made from the production views and core with isolated provider directories and nil preferences; no demonstration data or shipped QA mode",
+      "window_points": [
+        1440,
+        900
+      ],
+      "result": "Choose a recorded session, one Open Library action, no race metrics or synthetic charts"
+    },
+    "library_navigation": "Open Library action displayed provider session discovery with no included-sample row or action",
+    "limits": "No new full-session network download or native acquisition-cancellation trial in this change. Acquisition and cancellation are covered by the strict core suite; earlier actual recording checks remain historical."
+  },
+  "benchmark": {
+    "command": "./scripts/benchmark-core.sh 100",
+    "passed": true,
+    "synthetic": true,
+    "scan_and_indexed_random_snapshot_checksum": 4312,
+    "comparison_to_old_recorded_fixture_benchmark": "Not comparable; inputs changed"
+  },
+  "privacy": {
+    "tracked_files": 95,
+    "parsed_json_files": 14,
+    "markdown_files": 19,
+    "resolved_local_markdown_links": 94,
+    "sensitive_pattern_hits": {
+      "private_home": 0,
+      "private_key": 0,
+      "github_token": 0,
+      "aws_key": 0,
+      "api_key": 0,
+      "slack_token": 0
+    },
+    "removed_real_provider_fixtures": 12,
+    "release_notices_and_license_match_source": true,
+    "method_limit": "Pattern scans do not prove every string harmless. Research PDF and icon are unchanged from earlier metadata checks."
+  },
+  "publication": {
+    "intended_history": "One root commit, subject green flag, no body",
+    "visibility": "PRIVATE, verified through GitHub API; unchanged",
+    "provider_permission": "Unresolved; removing bundled datasets does not grant upstream clearance"
+  }
+}

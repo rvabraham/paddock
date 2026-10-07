@@ -1,0 +1,36 @@
+{
+  "record_status": "historical",
+  "current_validation": "fresh-validation.json",
+  "history_scope": "Values and commit references describe the earlier private history, before the October 7 squash.",
+  "phase": "baseline",
+  "app_mode": "bundled Monaco replay paused, timing table, driver inspector",
+  "rss_unit": "KiB",
+  "samples": [
+    {
+      "elapsed_sample_seconds": 0,
+      "process": "54958 01:03   0.0  83200   0:04.33"
+    },
+    {
+      "elapsed_sample_seconds": 5,
+      "process": "54958 01:08   0.0  84992   0:04.34"
+    },
+    {
+      "elapsed_sample_seconds": 10,
+      "process": "54958 01:13   0.0  84976   0:04.34"
+    }
+  ],
+  "playback_pace_samples": [
+    {
+      "elapsed_sample_seconds": 0,
+      "process": "70323 00:51  34.6  84272   0:15.28"
+    },
+    {
+      "elapsed_sample_seconds": 5,
+      "process": "70323 00:56  39.4  75056   0:17.08"
+    },
+    {
+      "elapsed_sample_seconds": 10,
+      "process": "70323 01:01  37.0  75264   0:18.91"
+    }
+  ]
+}

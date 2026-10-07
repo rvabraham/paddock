@@ -1,0 +1,74 @@
+# Fresh services and repository audit
+
+This report records the preceding 92-test release and initial October 7 publication checks. The [follow-up audit](follow-up-audit.md) and [validation record](follow-up-validation.json) cover the later repairs.
+
+Reviewed October 4, 2026, starting at `bbd11d2d150b1dd4f4ad1ccd3a7b4ef4401287d7`. This pre-squash review covers replay acquisition, HTTP, storage, historical parsing, and publication-related privacy and provenance. It does not replace the separate [publication assessment](publication.md). The initial services review did not change repository visibility, commit, push, rewrite history, or delete user recordings.
+
+At the initial October 7 publication check, `main` contained one `green flag` root commit with an empty body. Its application source and resources were unchanged from the validated release at that point. The October 4 history counts and old commit references below describe the tree reviewed then, not the current reachable `main` history. [Integrated validation](fresh-validation.json) records the 92-test result, release verification, and native checks.
+
+## Findings and fixes
+
+| Finding at the reviewed commit | Correction and evidence |
+| --- | --- |
+| A malformed archive could crash manifest validation. `manifest.bytes` summed untrusted encoded lengths before checking each length, so two `Int.max` values overflowed. | `ReplayArchiveStore.swift:74` validates each chunk before aggregation. `malformedManifestCannotOverflowStorageAccounting` writes that malformed manifest and verifies rejection through both manifest loading and Library enumeration. |
+| Direct archive loading also summed row counts before checking their bounds. | `ReplayArchivePersistence.swift:12` rejects excessive chunk counts and invalid individual row counts before summing or reserving arrays. The regression also supplies two `Int.max` sample counts. The existing aggregate payload test checks the 256 MiB budget before reading sample files. |
+| Clearing downloads suppressed archive deletion errors, then emptied Library metadata even when recordings remained. | `RaceProvider.clearCache` now propagates archive and legacy deletion failure. The core change catches it, refreshes actual metadata, and exposes the error. The isolated provider regression uses an unsafe symlink directory and verifies that clearing throws while the outside file remains untouched. |
+| Cancellation was checked while loading sample chunks, but final checksum verification could continue into publication. | `ReplayArchiveStore.swift:139` checks cancellation between checksum validations and immediately before committing. OpenF1 acquisition checks its request generation after loading the dataset. `cancelledVerificationCannotCommitAnArchive` verifies that a cancelled final verification leaves validated pieces pending and installs no completed manifest. Core adds cancellation checkpoints during index construction. |
+| Legacy migration decoded every JSON entry despite its configured entry limit. A cancelled pass had already marked migration complete. | Eligible files are selected deterministically by modification time and filename, newest first, with at most 65 candidates. Decoding stops when the 64-folder library fills. Cancellation is checked before and during the pass and leaves the migration gate unset. The 66-input regression verifies selection of the newest 64 sessions and successful retry after a cancelled pass. |
+| Per-session deletion suppressed legacy-file errors. A remaining legacy copy could be imported again after restart despite the apparently successful deletion. | `DiskCache.remove` and `clear` propagate filesystem or unsafe-path errors. `RaceProvider.deleteReplay` removes legacy data before deleting the completed archive. Its failure regression verifies that an unsafe legacy entry causes an error while the completed recording and outside file remain intact. Best-effort deletion is retained only for transient HTTP-response caching. |
+
+Integrated verification completed with 92 passing tests in eight suites under Swift 6, complete concurrency checking, and warnings treated as errors. The release build and listed native checks also passed; [the validation record](fresh-validation.json) preserves their source fingerprints and coverage limits. Earlier 73-test replay-overhaul results remain evidence for the earlier source.
+
+## HTTP and acquisition boundaries
+
+`ProviderHTTP` uses HTTPS for the two provider API hosts and completed files under `livetiming.formula1.com/static/`. It rejects URL credentials and arbitrary ports. Redirects retain the original host and HTTPS policy; historical redirects must remain in the permitted static path. No direct live transport or live connection symbol remains in the application sources. Direct-live URL strings occur only in rejection tests.
+
+URLSession is ephemeral, disables URLCache and cookies, and has 45-second request and 120-second resource timeouts. Its data delegate collects bounded Data chunks, rejects excessive Content-Length or received bytes, and cancels error-status bodies. Locked transfer state removes a continuation before resuming it. Cancellation before task startup and cancellation during reception use the same completion path. These checks establish the reviewed synchronization contract; they are not a formal race-freedom proof.
+
+Normal API responses are capped at 16 MiB. Individual historical topics are capped at 64 MiB; expanded records are capped at 8 MiB. Shared monotonic quota gates limit starts, not reservations. Every 429 or 503 installs Retry-After backoff, including the final attempt. Numeric and HTTP-date values are bounded. Transient HTTP and transport failures have a three-attempt ceiling, and cancellation interrupts waiting. Limits are per process; other clients or shared-IP quotas can still produce provider throttling.
+
+OpenF1 coordinates and telemetry use five-minute, half-open windows. Session metadata determines their actual start and finish, including an extended finish absent from an earlier Library summary. Resumption retains a saved sample piece only when its identifier, channel, start, and end match exactly. Sequential acquisition keeps raw responses and topic decoding from accumulating; the conservative OpenF1 start gate already sets a lower bound on download time. No new network-throughput benchmark was performed.
+
+Recorded fields and DRS mapping matched [OpenF1's technical documentation](https://openf1.org/docs/#car-data) consulted for the October 4 review. Its car-data and location endpoints described an approximate 3.7 Hz source rate; that is an upstream description, not an achieved rendering-rate claim. Locations and lap-start timestamps are approximate. Although the documentation describes null gaps for the leader, bundled responses also contain nulls for nonleaders. The core correction uses the latest recorded position at the interval's timestamp to label leadership and preserves unavailable gaps for other drivers.
+
+## Storage and decoding
+
+The replay manifest identifies its format version, source, session, channels, sample formats, checksums, and acquisition ranges where applicable. Each stored piece has a versioned header, explicit decoded length, and raw or LZFSE encoding. Reads check file size, SHA-256, decoded length, exact sample width/count, finite values, and driver-number bounds. Empty raw pieces are supported; zero-length compressed pieces, malformed headers, excessive decoded lengths, and checksum corruption are rejected.
+
+Replay storage charges regular-file bytes across completed and pending generations. The limits are 4 GiB for the library, 512 MiB per session folder, and 64 session folders. Atomic writes reserve the incoming payload before replacement; final cleanup retains files referenced by either manifest until the new completed manifest installs. A cancelled refresh leaves the prior completed recording usable through the disk-only loader. Estimates avoid rescanning the full library after every chunk.
+
+Before allocating aggregate sample arrays, loading validates the 256 MiB estimated coordinate/telemetry payload budget and the per-channel sample ceiling. That estimate excludes indexes, Foundation decoding, temporary compression buffers, and other app state. It is not an RSS ceiling. Storage limits count regular-file content, not directory metadata, extended attributes, or every filesystem allocation. Manual filesystem changes and another writer can invalidate cached storage estimates. Response-cache pruning targets regular JSON files and can fail when filesystem permissions change.
+
+Path checks reject symlink roots, direct parents, session folders, and file entries. Chunk filenames cannot traverse directories. This prevents the tested accidental or pre-existing symlink cases; it does not protect against a hostile process with the same user's privileges racing path replacements.
+
+Migration retains the original legacy JSON; explicit user deletion or clearing can remove it. Selection uses file modification dates as a recency preference, not as claimed provider retrieval timestamps. At most 65 eligible files are considered in a pass, and available session-folder capacity can reduce that number further. Older files remain available for a later pass when capacity is freed or the app restarts. The cap bounds archive decoding, while directory enumeration and metadata sorting still inspect the legacy directory. Existing legacy storage is separate from the new library's budget and is not silently pruned by migration.
+
+## Real historical evidence
+
+The three already-downloaded validation directories were inspected without another download. Raw JSON-stream records and raw-deflate telemetry were independently decoded in Python. Their replay clocks come from ExtrapolatedClock UTC minus the recorded elapsed timestamp. Each source contains 20 drivers.
+
+| Recording | Clock epoch, UTC | Last Ends, UTC | Raw coordinate samples | Raw telemetry samples |
+| --- | --- | --- | --- | --- |
+| Australia 2019 race | 2019-03-17 04:40:00.302 | 2019-03-17 06:41:39.594 | 491,220 | 616,680 |
+| Australia 2019 qualifying | 2019-03-16 05:45:00.148 | 2019-03-16 07:03:47.649 | 318,160 | 390,340 |
+| Monaco 2024 qualifying | 2024-05-25 13:47:04.682 | 2024-05-25 15:06:52.873 | 349,180 | 344,820 |
+
+These are raw source counts, including pre-session samples, not the filtered arrays stored in a replay. No inspected topic had records after Ends plus two seconds. Monaco has a Finalised status at 15:03:21.348 UTC, then the later Ends status and a substantive steward-investigation message dated 15:06:53 UTC. Blindly clipping at the first Finalised would discard that recorded message. The existing decoder takes the later terminal status. Its high-rate filtering was preserved while core reviewed duration across retained channels.
+
+Australia's scheduled race start is March 17 at 05:10 UTC, which is March 16 at 22:10 in Los Angeles. A March 16 local date in this Mac's Library is therefore consistent with the source timezone conversion.
+
+The native reader preserves explicit SessionPart qualifying phases, source BestLapTime changes and resets, sparse timing patches, pit intervals, and retirement status. The real-stream inspection supports its clock and temporal boundaries; it does not establish complete coverage of every season, prove every inferred lap boundary, or measure sustained native playback. Missing-index fallback remains metadata-derived, path-validated, and limited to completed historical files.
+
+## October 4 history scan, privacy, and provenance
+
+The initial October 4 scan examined three reachable commits, 159 unique blobs, and 156 UTF-8 blobs totaling 5,339,248 bytes. Commit attribution used the project's public GitHub pseudonym and noreply address. No submodule or embedded remote URL credential was found. No tracked credential filename, common private-key marker, AWS/GitHub/OpenAI/Slack token pattern, or private owner-home path was found. The only email-pattern matches were synthetic URL-userinfo rejection fixtures in two historical versions of `ServiceTests.swift`, lines 121 and 126. Candidate values were not printed. The later pre-squash scan is recorded separately in [integrated validation](fresh-validation.json).
+
+The tracked working tree was scanned again during the review. All 12 provider JSON resources and the generated icon were byte-identical to the initial commit. The provider responses retain their separate terms; the fixture script supplies query provenance, while original retrieval timestamps are absent. At that time, removed live implementations were reachable at `ea04371:Sources/PaddockCore/Services.swift` and `dc80353:Sources/PaddockCore/SignalRService.swift`. Those references are historical evidence. Neither old commit is reachable from the October 7 single-root `main`.
+
+Six unreachable local blobs were also checked for common key and home-path markers without a finding during the October 4 review. They were separate from its reachable history. That review did not remove or rewrite Git objects; this is not a claim about the later publication-history replacement.
+
+The three binary versions reachable in the initial scan were one icon and two research PDFs. Both PDFs had 14 pages; their extracted text and metadata had no scanned credential, email, or owner-home-path finding. The PDF in the reviewed working tree had no page image XObjects or embedded font descriptors; its builder used standard Helvetica faces and generated layout. Icon PNG parts had no text metadata chunks. These checks do not detect arbitrary steganography or prove that every binary byte is harmless. Built executable strings were outside this tracked-object scan and were checked separately during [release validation](fresh-validation.json).
+
+`research/linear-apple/report-source.md` is dated September 7, cites its sources, and distinguishes design proposals from established provider support. Its live-first recommendations are historical research, not a claim about the current replay-only app. No private account content or conspicuous copied asset was observed. External references and excerpts keep their own rights. No vendored provider client or external app package dependency was found, but that absence does not prove the origin of every authored line. FastF1 format consultation, original code licensing, provider-data terms, and service access remain separate questions.
+
+This was a format-based and manual review, not an exhaustive secret-classification or legal-clearance process. It found no observed credential or private-content publication blocker within the inspected material. The separate publication assessment addresses the maintainer's United States hobby-project decision and unresolved data/service rights.

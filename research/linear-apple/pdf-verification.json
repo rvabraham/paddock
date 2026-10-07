@@ -1,0 +1,205 @@
+{
+  "pages": [
+    {
+      "page": 1,
+      "title": "A live F1 companion, informed by Linear and Apple",
+      "body_font_pt": 10.7,
+      "leading_pt": 15.0,
+      "content_height": 643.3,
+      "bottom_y": 126.59,
+      "sources": [
+        "L01",
+        "A01"
+      ]
+    },
+    {
+      "page": 2,
+      "title": "Linear: start with a clear product purpose",
+      "body_font_pt": 10.7,
+      "leading_pt": 15.0,
+      "content_height": 658.7,
+      "bottom_y": 111.19,
+      "sources": [
+        "L02",
+        "L03",
+        "L04"
+      ]
+    },
+    {
+      "page": 3,
+      "title": "Linear: make quality a working practice",
+      "body_font_pt": 10.7,
+      "leading_pt": 15.0,
+      "content_height": 611.3,
+      "bottom_y": 158.59,
+      "sources": [
+        "L05",
+        "L06",
+        "L07",
+        "L08",
+        "L09"
+      ]
+    },
+    {
+      "page": 4,
+      "title": "Linear: engineering makes the interface dependable",
+      "body_font_pt": 10.7,
+      "leading_pt": 15.0,
+      "content_height": 619.1,
+      "bottom_y": 150.79,
+      "sources": [
+        "L10",
+        "L11",
+        "L01"
+      ]
+    },
+    {
+      "page": 5,
+      "title": "Linear's detail work: protect the user's intention",
+      "body_font_pt": 10.7,
+      "leading_pt": 15.0,
+      "content_height": 626.3,
+      "bottom_y": 143.59,
+      "sources": [
+        "L12",
+        "L13",
+        "L14",
+        "L15"
+      ]
+    },
+    {
+      "page": 6,
+      "title": "Linear's detail work: remove uncertainty and visual noise",
+      "body_font_pt": 10.7,
+      "leading_pt": 15.0,
+      "content_height": 686.3,
+      "bottom_y": 83.59,
+      "sources": [
+        "L08",
+        "L16",
+        "L17",
+        "L18"
+      ]
+    },
+    {
+      "page": 7,
+      "title": "Apple: clarity, agency, and platform coherence",
+      "body_font_pt": 10.7,
+      "leading_pt": 15.0,
+      "content_height": 693.3,
+      "bottom_y": 76.59,
+      "sources": [
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ]
+    },
+    {
+      "page": 8,
+      "title": "Apple: design the complete interaction",
+      "body_font_pt": 10.7,
+      "leading_pt": 15.0,
+      "content_height": 650.3,
+      "bottom_y": 119.59,
+      "sources": [
+        "A05",
+        "A06",
+        "A03",
+        "A07"
+      ]
+    },
+    {
+      "page": 9,
+      "title": "Apple: accessibility and performance shape the design",
+      "body_font_pt": 10.7,
+      "leading_pt": 15.0,
+      "content_height": 641.7,
+      "bottom_y": 128.19,
+      "sources": [
+        "A08",
+        "A09",
+        "A10"
+      ]
+    },
+    {
+      "page": 10,
+      "title": "Apple Sports: depth across several levels of attention",
+      "body_font_pt": 10.2,
+      "leading_pt": 14.1,
+      "content_height": 718.5,
+      "bottom_y": 51.39,
+      "sources": [
+        "A11",
+        "A12",
+        "A13",
+        "A14"
+      ]
+    },
+    {
+      "page": 11,
+      "title": "What transfers, and where judgment is required",
+      "body_font_pt": 10.7,
+      "leading_pt": 15.0,
+      "content_height": 712.4,
+      "bottom_y": 57.49,
+      "sources": [
+        "L11",
+        "L09"
+      ]
+    },
+    {
+      "page": 12,
+      "title": "Proposed experience: the live session is the home of the product",
+      "body_font_pt": 10.7,
+      "leading_pt": 15.0,
+      "content_height": 710.7,
+      "bottom_y": 59.19,
+      "sources": [
+        "L02",
+        "A01"
+      ]
+    },
+    {
+      "page": 13,
+      "title": "Proposed interaction contracts for the F1 app",
+      "body_font_pt": 10.4,
+      "leading_pt": 14.6,
+      "content_height": 709.6,
+      "bottom_y": 60.29,
+      "sources": [
+        "A05",
+        "A06",
+        "A08",
+        "A14"
+      ]
+    },
+    {
+      "page": 14,
+      "title": "Proposed build approach and remaining questions",
+      "body_font_pt": 10.4,
+      "leading_pt": 14.6,
+      "content_height": 704.9,
+      "bottom_y": 64.99,
+      "sources": [
+        "L07",
+        "L11",
+        "L08",
+        "A10"
+      ]
+    }
+  ],
+  "source_count": 32,
+  "hyperlinks": 105,
+  "unique_source_urls": 32,
+  "word_count": 5425,
+  "pdf_bytes": 69935,
+  "revision": "October 4, 2026 prose edit; September 7, 2026 research scope preserved",
+  "visual_review": "All 14 rendered pages inspected. No clipping, overlap, replacement glyphs, or layout defects observed.",
+  "privacy_review": {
+    "text_and_metadata_common_secret_home_path_email_findings": 0,
+    "raw_email_pattern_matches_inside_compressed_streams": 1,
+    "author_unchanged": true,
+    "source_citation_occurrences_preserved": true
+  }
+}

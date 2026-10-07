@@ -1,0 +1,120 @@
+{
+  "record_status": "historical",
+  "current_product_reference": "../../README.md",
+  "as_of": "2026-10-01",
+  "scope": "Free coverage source feasibility. No native application has been implemented.",
+  "user_direction": {
+    "platform": "Native macOS first, fitting the latest macOS",
+    "allowed_ui_stacks": ["Swift", "GPUI"],
+    "provider_budget": 0,
+    "centerpiece": "Live race coverage when free access is available",
+    "fallback": "Historical race data replay",
+    "supporting_features": ["F1 schedule", "Replay", "Detailed race and driver context"],
+    "video": "Explore free video as well as data",
+    "workflow": "RVA workflow retired by user instruction"
+  },
+  "proposed_sources": {
+    "live_data": {
+      "provider": "Direct F1 SignalR Core",
+      "endpoint": "https://livetiming.formula1.com/signalrcore",
+      "status": "Unauthenticated negotiation and subscription snapshot verified",
+      "active_session_updates_verified": false,
+      "topics_received": [
+        "Heartbeat", "DriverList", "ExtrapolatedClock", "RaceControlMessages",
+        "SessionInfo", "SessionStatus", "TimingAppData", "TimingStats",
+        "TrackStatus", "WeatherData", "SessionData", "TimingData"
+      ],
+      "requested_but_absent_topics": ["LapCount"],
+      "subscription_only_per_maintainer_source": [
+        "CarData.z", "Position.z", "ChampionshipPrediction", "PitLaneTimeCollection"
+      ],
+      "limits": [
+        "Undocumented application feed without a published availability guarantee",
+        "A completed-session snapshot does not prove changing live race data",
+        "Individual topic and field availability must be detected",
+        "Do not promise free live telemetry or moving-car coordinates"
+      ]
+    },
+    "replay": {
+      "primary": "OpenF1 historical REST",
+      "coverage": "Historical sessions from 2023 onward, subject to actual dataset availability",
+      "authentication": "None for historical data",
+      "rate_limits": {"requests_per_second": 3, "requests_per_minute": 30},
+      "availability": "Published live window lasts from 30 minutes before a session through 30 minutes after it; historical access is free outside it. Check actual data readiness.",
+      "alternatives": ["F1 static timing archives", "FastF1 historical importer"],
+      "notes": [
+        "Replay means reconstructing the session from historical data, not a full race video archive",
+        "Keep discrete timing state separate from interpolated visual movement",
+        "Use timing position events for the leaderboard, not inferred map order",
+        "Cache historical downloads locally and preserve raw timestamps",
+        "Missing measurements remain unavailable rather than becoming zero"
+      ]
+    },
+    "schedule": {
+      "provider": "Jolpica F1",
+      "endpoint": "https://api.jolpi.ca/ergast/f1/2026/races/?limit=100",
+      "authentication": "None",
+      "rate_limits": {"requests_per_second": 4, "requests_per_hour": 500},
+      "notes": ["Custom application/version User-Agent required", "Cache calendar locally", "Some session dates or times may be absent", "Published limits may change"]
+    },
+    "video": {
+      "approach": "Official viewing links initially; validate any in-app embedded player individually",
+      "global_free_full_season_native_stream_verified": false,
+      "official_free_offerings": [
+        {"provider": "Apple TV", "territory": "United States", "coverage": "Every practice session and selected race weekends without a subscription"},
+        {"provider": "Tubi", "territory": "United States", "coverage": "The Fast Lane creator altcasts announced for Miami, Austin, and Las Vegas in 2026"},
+        {"provider": "ServusTV On", "territory": "Austria", "coverage": "Selected live Grands Prix, delayed replay coverage for others"},
+        {"provider": "Channel 4", "territory": "United Kingdom", "coverage": "British GP live and other-session highlights under announced rights through 2026"}
+      ],
+      "limits": [
+        "Free viewing does not establish a third-party playback API or redistribution permission",
+        "Territory and session availability vary",
+        "No actual video playback or embedding was tested",
+        "Highlights and creator altcasts are distinct from complete world-feed race coverage"
+      ]
+    },
+    "excluded_paid_live_provider": {
+      "provider": "Hosted OpenF1 live service",
+      "reason": "Current live REST, MQTT, and WebSocket access requires a paid sponsor tier"
+    }
+  },
+  "direct_probes": [
+    {"target": "F1 legacy /signalr/negotiate", "http_status": 401, "interpretation": "Obsolete protocol endpoint; does not determine current Core feed availability"},
+    {"target": "F1 Core OPTIONS negotiate", "http_status": 405, "interpretation": "Preflight used by one library is not necessary for the successful standard Core POST"},
+    {"target": "F1 Core POST negotiate?negotiateVersion=1", "http_status": 200, "authentication": "None", "transports": ["WebSockets", "ServerSentEvents", "LongPolling"]},
+    {"target": "F1 Core JSON handshake and Subscribe over LongPolling", "http_status": 200, "authentication": "None", "snapshot_bytes": 68496, "snapshot_topic_count": 12, "session_status": "Finalised", "interpretation": "Successful unauthenticated subscription returning useful topic snapshots; not an active-race streaming validation", "metadata_caution": "Returned meeting geography/name fields were inconsistent and the Finalised status accompanied an upcoming session date. Do not treat this snapshot as current live truth without cross-checking."},
+    {"target": "F1 static/2024/Index.json", "http_status": 200, "meeting_count": 15, "interpretation": "Archive access works but index completeness is not established"},
+    {"target": "Jolpica 2026 schedule", "http_status": 200, "race_count": 23, "interpretation": "Returned calendar is accessible; upcoming event accuracy needs normal cross-checking"},
+    {"target": "OpenF1 Monaco 2024 Race session", "http_status": 200, "session_key": 9523},
+    {"target": "OpenF1 laps, session 9523, driver 16", "http_status": 200, "records": 78, "interpretation": "Historical lap and sector data received, with some null measurements"},
+    {"target": "OpenF1 position, session 9523, driver 16", "http_status": 200, "records": 1, "interpretation": "Position is a change-event series, not a continuous frame stream"},
+    {"target": "OpenF1 location, session 9523, driver 16, 15-second sample", "http_status": 200, "records": 63, "interpretation": "Historical timestamped x/y/z samples received; full-session replay processing remains untested"}
+  ],
+  "next_validation": [
+    "Verify fresh, changing timing and race-control events during an active session",
+    "Compare session identity and timing with the calendar and authoritative race context",
+    "Measure freshness, reconnect reconciliation, and topic availability over a session",
+    "Build live and replay adapters into the same native session model",
+    "Keep replay mode explicit and offer it when live coverage is unavailable"
+  ],
+  "sources": [
+    "https://openf1.org/",
+    "https://openf1.org/docs/",
+    "https://github.com/JustAman62/undercut-f1",
+    "https://github.com/JustAman62/undercut-f1/blob/0651b66dab11143d980d94491e404d56e3ffb8a3/UndercutF1.Data/Client/LiveTimingClient.cs",
+    "https://github.com/JustAman62/undercut-f1/blob/0651b66dab11143d980d94491e404d56e3ffb8a3/UndercutF1.Data/Formula1Account.cs",
+    "https://github.com/theOehrly/Fast-F1/blob/main/fastf1/livetiming/client.py",
+    "https://github.com/theOehrly/Fast-F1/blob/master/docs/data_reference/index.rst",
+    "https://github.com/jolpica/jolpica-f1/blob/main/docs/endpoints/races.md",
+    "https://github.com/jolpica/jolpica-f1/blob/main/docs/rate_limits.md",
+    "https://github.com/jolpica/jolpica-f1/blob/main/docs/README.md",
+    "https://github.com/IAmTomShaw/f1-race-replay/blob/main/telemetry.md",
+    "https://github.com/IAmTomShaw/f1-race-replay/blob/main/src/f1_data.py",
+    "https://tv.apple.com/us/info/watch-f1",
+    "https://corporate.tubitv.com/press/tubi-revs-up-for-2026-formula-1-season-on-apple-tv-with-creator-led-live-altcasts-the-fast-lane/",
+    "https://www.servustv.com/de/content/artikel/PN5TIBU059T7L8L/formel-1-2026-die-live-rennen-bei-servustv-und-servustv-on",
+    "https://www.channel4.com/press/news/sky-and-channel-4-extend-partnership-keep-formula-1-highlights-and-british-gp-free-air",
+    "https://developers.google.com/youtube/terms/required-minimum-functionality",
+    "https://www.formula1.com/en/information/guidelines.4EOKE9RRqevL4niTK9kWyt"
+  ]
+}
